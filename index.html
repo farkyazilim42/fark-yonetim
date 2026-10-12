@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fark Destek Yönetim</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="mark">Fark Destek</p>
+        <h1>Yönetim paneli</h1>
+      </div>
+      <button id="cikis" type="button" hidden>Çıkış</button>
+    </header>
+
+    <section id="giris">
+      <form id="giris-form">
+        <label>Kullanıcı<input name="kullanici" autocomplete="username" required value="admin"></label>
+        <label>Parola<input name="sifre" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Giriş</button>
+        <p class="hint">İlk parola, sunucunun yazdığı <code>data\ilk-yonetici.txt</code> dosyasındadır. Teknisyen hesapları bu panelden açılır; panelde olmayan hesap uygulamaya giremez.</p>
+        <p id="giris-hata" class="hata"></p>
+      </form>
+    </section>
+
+    <section id="panel" hidden>
+      <nav>
+        <button type="button" class="sekme aktif" data-sekme="teknisyen">Teknisyenler</button>
+        <button type="button" class="sekme" data-sekme="adres">Adres defteri</button>
+        <button type="button" class="sekme" data-sekme="log">Oturum kayıtları</button>
+      </nav>
+
+      <div id="teknisyen" class="sayfa">
+        <form id="teknisyen-form" class="kart">
+          <h2>Teknisyen ekle</h2>
+          <div class="grid">
+            <label>Kullanıcı adı<input name="kullanici" required></label>
+            <label>Ad<input name="ad" required></label>
+            <label>Parola<input name="sifre" type="password" required minlength="8"></label>
+          </div>
+          <div class="izinler">
+            <label><input name="baglanti" type="checkbox" checked>Bağlantı</label>
+            <label><input name="dosya" type="checkbox">Dosya</label>
+            <label><input name="pano" type="checkbox">Pano</label>
+            <label><input name="ses" type="checkbox">Ses</label>
+            <label><input name="kayit" type="checkbox">Ekran kaydı</label>
+          </div>
+          <button type="submit">Kaydet</button>
+          <p id="teknisyen-hata" class="hata"></p>
+        </form>
+        <div id="teknisyen-liste"></div>
+      </div>
+
+      <div id="adres" class="sayfa" hidden>
+        <form id="adres-form" class="kart">
+          <h2>Müşteri ekle</h2>
+          <div class="grid">
+            <label>Unvan<input name="unvan" required></label>
+            <label>Telefon<input name="telefon"></label>
+            <label>Son bağlantı ID<input name="sonId"></label>
+          </div>
+          <label>Not<textarea name="not" rows="2"></textarea></label>
+          <button type="submit">Deftere yaz</button>
+        </form>
+        <form id="ara-form" class="satir">
+          <input name="q" placeholder="Unvan, telefon, not veya ID">
+          <button type="submit">Ara</button>
+        </form>
+        <div id="adres-liste"></div>
+      </div>
+
+      <div id="log" class="sayfa" hidden>
+        <div id="log-liste"></div>
+      </div>
+    </section>
+  </main>
+  <script src="ayar.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
