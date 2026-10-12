@@ -118,9 +118,12 @@ document.getElementById("giris-form").onsubmit = function (ev) {
 };
 
 document.getElementById("cikis").onclick = function () {
+  var eski = token;
   token = "";
   sessionStorage.removeItem("farkToken");
   goster(true);
+  if (!eski) return;
+  fetch(kok + "/api/cikis", { method: "POST", headers: { Authorization: "Bearer " + eski } }).catch(function () {});
 };
 
 var sekmeler = document.querySelectorAll(".sekme");
